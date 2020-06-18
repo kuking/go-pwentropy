@@ -58,5 +58,5 @@ func entropy(uniqueSymbols int, length int) float64 {
 	if uniqueSymbols == 0 || length == 0 {
 		return 0
 	}
-	return math.Log2(math.Pow(float64(uniqueSymbols), float64(length-1)))
+	return math.Log2(math.Pow(float64(uniqueSymbols), float64(length)))
 }
