@@ -1,7 +1,7 @@
 # go-pwentropy
-Estimates password entropy and excludes common passwords. Useful if you need to generate entropy for a key but you
-want to let the user input a password but you want to be sure the password provided has enough entropy for the
-desired key size. At least, to some extend (it is compliated.).
+Estimates password entropy considering common passwords. Useful if you need to generate entropy for a cipher key (using
+some sort of password derivation function), but want to be sure the user inputs a password with enough entropy for the
+desired key size. At least, with some confidence (it is complicated, read below.).
 
 **Long explanation and complicated answer**
 
