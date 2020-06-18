@@ -23,7 +23,7 @@ func TestEstimateEntropyByClasses_OneClass(t *testing.T) {
 	assertEstimateEntropyByClasses(t, "12", entropy(10, 2))
 
 	assertEstimateEntropyByClasses(t, "!", entropy(40, 1))
-	assertEstimateEntropyByClasses(t, "!\"'-_=+£$%*()[]{}:;@´#~|\\/?,.<>`¬|", entropy(40, 34))
+	assertEstimateEntropyByClasses(t, "!\"'-_=+£$%*()[]{}:;@´#~|\\/?,.<>`¬|", entropy(40, 37))
 }
 
 func TestEstimateEntropyByClasses_MultipleClasses(t *testing.T) {
@@ -48,21 +48,37 @@ func TestUniqueSymbolsEntropy_OneSymbol(t *testing.T) {
 
 func TestUniqueSymbolsEntropy_Multiple(t *testing.T) {
 	assertUniqueSymbolsEntropy(t, "aAbB", entropy(4, 4))
-	assertUniqueSymbolsEntropy(t, "A common password", entropy(13, 17)) // dupes: ' 'mos
+	assertUniqueSymbolsEntropy(t, "A common password", entropy(12, 17)) // dupes: ' 'mos
 }
 
-func entropy(uniqueSymbols int, length int) float64 {
-	return math.Log2(math.Pow(float64(uniqueSymbols), float64(length-1)))
+func TestFairEntropy(t *testing.T) {
+	pw := "this is a dictionary password"
+	clsEntropy := EstimateEntropyByClasses(pw)
+	uniqEntropy := UniqueSymbolsEntropy(pw)
+	fairEntropy := (clsEntropy + uniqEntropy) / 2
+
+	// 250k words in the average english speaker vocabulary, 5 words + space
+	//dictionaryEntropy := entropy(250000, 5+1)
+	//fmt.Println("class entropy:", clsEntropy)
+	//fmt.Println("unique entropy:", uniqEntropy)
+	//fmt.Println("fair entropy:", fairEntropy)
+	//fmt.Println("dictionary entropy:", dictionaryEntropy)
+
+	if FairEntropy(pw)-fairEntropy > 0.001 {
+		t.Error("Fair entropy not calculated as average of both Unique and Class entropy")
+	}
 }
 
 func assertEstimateEntropyByClasses(t *testing.T, pw string, expectedEntropy float64) {
-	if math.Abs(EstimateEntropyByClasses(pw)-expectedEntropy) > 0.001 {
-		t.Errorf("Password '%v' has an entropy of ~%2.2f", pw, expectedEntropy)
+	retEntropy := EstimateEntropyByClasses(pw)
+	if math.Abs(retEntropy-expectedEntropy) > 0.001 {
+		t.Errorf("Password '%v' calculated entropy %2.2f, but expected ~%2.2f", pw, retEntropy, expectedEntropy)
 	}
 }
 
 func assertUniqueSymbolsEntropy(t *testing.T, pw string, expectedEntropy float64) {
-	if math.Abs(UniqueSymbolsEntropy(pw)-expectedEntropy) > 0.001 {
-		t.Errorf("Password '%v' has an entropy of ~%2.2f", pw, expectedEntropy)
+	retEntropy := UniqueSymbolsEntropy(pw)
+	if math.Abs(retEntropy-expectedEntropy) > 0.001 {
+		t.Errorf("Password '%v' calculated entropy %2.2f, but expected ~%2.2f", pw, retEntropy, expectedEntropy)
 	}
 }
