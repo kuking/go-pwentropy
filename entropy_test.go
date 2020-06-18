@@ -1,6 +1,7 @@
 package go_pwentropy
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
@@ -63,6 +64,12 @@ func TestFairEntropy(t *testing.T) {
 	//fmt.Println("unique entropy:", uniqEntropy)
 	//fmt.Println("fair entropy:", fairEntropy)
 	//fmt.Println("dictionary entropy:", dictionaryEntropy)
+
+	fmt.Printf("%2.4f\n", entropy(4, 5))
+	fmt.Printf("%2.4f\n", entropy(26, 5))
+	fmt.Printf("%2.4f\n", entropy(250000, 1))
+	fmt.Printf("%2.4f\n", entropy(25000, 1))
+	fmt.Printf("%2.4f\n", entropy(2, 1))
 
 	if FairEntropy(pw)-fairEntropy > 0.001 {
 		t.Error("Fair entropy not calculated as average of both Unique and Class entropy")
