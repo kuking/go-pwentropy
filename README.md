@@ -25,4 +25,29 @@ the password database can be what the adversary is *actually* using to guess it.
 
 #### Approach
 
+We define three different entropy calculations:
+- EntropyByUniqueSymbols: counts the distinct symbols in the password, i.e. for hello it would be 4. This is a lower bound for
+  the entropy, but it does not takes into consideration dictionary words, or known passwords.
+- EntropyByClasses: calculates the entropy calculating the symbol size by detecting character classes in the password 
+  (i.e. upper case, lower case, numbers, etc.)
+- EntropyByUniqueExclCommonSeqs: Similar to UniqueSymbols entropy calculation, but substract from the length of the
+  password the known common char sequences.
 
+We recommend using the FairEntropy which is a combination of the previous three:
+- 50% EntropyByUniqueSymbols
+- 25% EntropyByClasses
+- 25% EntropyByUniqueExclCommonSeqs
+
+It provides a conservative result. Examples:
+
+| Password                                          | by Unique Symbols | by Classes | by Unique excl.Common | Fair   | 
+|---------------------------------------------------|-------------------|------------|-----------------------|--------|
+| `this is a dictionary password`                   | 110.41            | 175.29     | 41.88                 | 109.50 |
+| `dictionary`                                      | 31.70             | 47.00      | 0.00                  | 27.60  |
+| `dictionarydictionary`                            | 63.40             | 94.01      | 0.00                  | 55.20  |
+| `dictionary dictionary`                           | 69.76             | 126.93     | 3.32                  | 67.44  |
+| `dictionarydictionarydictionary`                  | 95.10             | 141.01     | 0.00                  | 82.80  |
+| `dictionary dictionary dictionary`                | 106.30            | 193.42     | 6.64                  | 103.17 |
+| `4HAGK-RMYKQ`                                     | 36.54             | 68.73      | 36.54                 | 44.59  |
+| `WP96N-BTY7X-DSNFQ-VAAWH`                         | 95.91             | 143.70     | 95.91                 | 107.86 |
+| `WP96N-BTY7X-DSNFQ-VAAWH-QSTH5-AE7E7-VED5E-7TMWD` | 206.44            | 293.65     | 206.44                | 228.24 |
