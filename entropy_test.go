@@ -62,6 +62,7 @@ func TestEntropyByUniqueExclCommonSeqs(t *testing.T) {
 
 func TestFairEntropy(t *testing.T) {
 	pws := []string{"this is a dictionary password",
+		"hello",
 		"dictionary",
 		"dictionarydictionary", "dictionary dictionary",
 		"dictionarydictionarydictionary", "dictionary dictionary dictionary",

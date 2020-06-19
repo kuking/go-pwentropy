@@ -42,6 +42,7 @@ It provides a conservative result. Examples:
 
 | Password                                          | by Unique Symbols | by Classes | by Unique excl.Common | Fair   | 
 |---------------------------------------------------|-------------------|------------|-----------------------|--------|
+| `hello`                                           | 10.00             | 23.50      | 10.00                 | 13.38  |
 | `this is a dictionary password`                   | 110.41            | 175.29     | 41.88                 | 109.50 |
 | `dictionary`                                      | 31.70             | 47.00      | 0.00                  | 27.60  |
 | `dictionarydictionary`                            | 63.40             | 94.01      | 0.00                  | 55.20  |
@@ -51,3 +52,8 @@ It provides a conservative result. Examples:
 | `4HAGK-RMYKQ`                                     | 36.54             | 68.73      | 36.54                 | 44.59  |
 | `WP96N-BTY7X-DSNFQ-VAAWH`                         | 95.91             | 143.70     | 95.91                 | 107.86 |
 | `WP96N-BTY7X-DSNFQ-VAAWH-QSTH5-AE7E7-VED5E-7TMWD` | 206.44            | 293.65     | 206.44                | 228.24 |
+
+* notice, the password `hello` was not excluded by the 'common char sequences' as it is a short word with low uniqueness.
+While building the database we tried to strike a balance between providing a small enough static compilable code without 
+requiring to download the whole database into disc with its implied dependency. Please notice that 13 bits of entropy 
+is not fair nowadays, so it can be reasonably discarded by a fair minimum entropy, i.e of 100 bits.
