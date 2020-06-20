@@ -4,8 +4,8 @@ Creates good passwords and verifies passwords' quality (estimating its entropy).
 
 Estimates password entropy considering common character sequences, practical enough so it does not require an external
 database of sequences. Useful if you need to generate entropy for a cipher key (using some sort of password derivation
-function), but want to be sure the interactive user inputs a password with enough entropy for the desired key size. 
-At least, to some confidence level (it is complicated, read below.).
+function), but want to be sure the interactive user inputs a password with enough entropy for the desired key size, or
+you want to suggest him a good password. At least, to some confidence level (it is complicated, read below.).
 
 **Long explanation and complicated answer**
 
@@ -68,6 +68,36 @@ While building the database we tried to strike a balance between providing a sma
 requiring to download the whole database into disk with its implied dependency. Please notice that 13 bits of entropy 
 is not fair nowadays, so it can be reasonably discarded by a fair minimum entropy, i.e of 100 bits.
 
+#### Password generation examples
+
+Generated using this [the demo app](demo/demo.go)
+
+
+```
+box:~/go-pwentropy/demo$ go build && ./demo 
+go-pwentropy demo
+
+Minimum 96 bits of Entropy:
+Numbers(min. 96, calc: 108.15): 5928-3921-9719-6025-2469-73
+   Easy(min. 96, calc: 106.79): 2RzhD-ue39b-NdeSf-8vkW
+Complex(min. 96, calc: 105.50): PqUT$-kPLGu-BC9)n-nsom
+
+Minimum 128 bits of Entropy:
+Numbers(min. 128, calc: 144.20): 3683-4410-2788-9745-6318-5918-9884-8
+   Easy(min. 128, calc: 134.28): LEV7E-NvN8B-wsML3-FNexE-A73u
+Complex(min. 128, calc: 141.70): 5Dsmo-Zv?bi-xUEbd-g&!H8-Y(OY
+
+Minimum 192 bits of Entropy:
+Numbers(min. 192, calc: 208.29): 4702-7308-4619-8046-7836-3009-4190-8327-0253-7855-03
+   Easy(min. 192, calc: 200.89): aqaSj-3De8u-d4SDw-jqKht-pndsE-4RHjB-r8y
+Complex(min. 192, calc: 195.74): Iq(P^-*a$@*-p1L2]-YyXys-Y^{[C-4R4os-*a
+
+Minimum 256 bits of Entropy:
+Numbers(min. 256, calc: 268.37): 0893-1243-7724-8097-7773-2593-7454-9450-1579-9469-5332-5682-6125-76
+   Easy(min. 256, calc: 265.58): ykjRz-MHz6N-z4pDK-DMqdt-EzW95-DyKxb-w7x7R-5Lr7y-AC
+Complex(min. 256, calc: 268.70): q[xPv-Q6*cu-Lx*hM-VD!CN-4XAyP-jYOnb-cYs$[-rfbz2-b
+```
+
 ## Usage
 
 ```go
@@ -77,4 +107,3 @@ pw := pwe.PwGen(pwe.FormatEasy, pwe.Strength96)
 fmt.Println("password:",pw,"has entropy of", pwe.FairEntropy(pw))
 ```
 
-for a full demo look at [the demo app](demo/demo.go)
