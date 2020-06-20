@@ -13,22 +13,22 @@ import (
 //}
 
 func TestEntropyForEasyFormat(t *testing.T) {
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_EASY, STRENGTH_96)), 96.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_EASY, STRENGTH_128)), 128.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_EASY, STRENGTH_192)), 192.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_EASY, STRENGTH_256)), 256.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatEasy, Strength96)), 96.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatEasy, Strength128)), 128.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatEasy, Strength192)), 192.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatEasy, Strength256)), 256.0)
 }
 
 func TestEntropyForNumbersFormat(t *testing.T) {
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_NUMBERS, STRENGTH_96)), 96.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_NUMBERS, STRENGTH_128)), 128.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_NUMBERS, STRENGTH_192)), 192.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_NUMBERS, STRENGTH_256)), 256.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatNumbers, Strength96)), 96.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatNumbers, Strength128)), 128.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatNumbers, Strength192)), 192.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatNumbers, Strength256)), 256.0)
 }
 
 func TestEntropyForComplexFormat(t *testing.T) {
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_COMPLEX, STRENGTH_96)), 96.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_COMPLEX, STRENGTH_128)), 128.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_COMPLEX, STRENGTH_192)), 192.0)
-	assert.Greater(t, FairEntropy(PwGen(FORMAT_COMPLEX, STRENGTH_256)), 256.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatComplex, Strength96)), 96.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatComplex, Strength128)), 128.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatComplex, Strength192)), 192.0)
+	assert.Greater(t, FairEntropy(PwGen(FormatComplex, Strength256)), 256.0)
 }

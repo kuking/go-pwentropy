@@ -73,7 +73,7 @@ is not fair nowadays, so it can be reasonably discarded by a fair minimum entrop
 ```go
 import pwe "github.com/kuking/go-pwentropy"
 
-pw := pwe.PwGen(pwe.FORMAT_EASY, pwe.STRENGTH_96) 
+pw := pwe.PwGen(pwe.FormatEasy, pwe.Strength96) 
 fmt.Println("password:",pw,"has entropy of", pwe.FairEntropy(pw))
 ```
 

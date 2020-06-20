@@ -5,8 +5,8 @@ import (
 	pwe "github.com/kuking/go-pwentropy"
 )
 
-var formatToStr = map[pwe.PwFormat]string{pwe.FORMAT_COMPLEX: "Complex", pwe.FORMAT_EASY: "Easy", pwe.FORMAT_NUMBERS: "Numbers"}
-var strengthToInt = map[pwe.PwStrength]int{pwe.STRENGTH_96: 96, pwe.STRENGTH_128: 128, pwe.STRENGTH_192: 192, pwe.STRENGTH_256: 256}
+var formatToStr = map[pwe.PwFormat]string{pwe.FormatComplex: "Complex", pwe.FormatEasy: "Easy", pwe.FormatNumbers: "Numbers"}
+var strengthToInt = map[pwe.PwStrength]int{pwe.Strength96: 96, pwe.Strength128: 128, pwe.Strength192: 192, pwe.Strength256: 256}
 
 func printOne(format pwe.PwFormat, strength pwe.PwStrength) {
 	pw := pwe.PwGen(format, strength)
@@ -20,9 +20,9 @@ func main() {
 	for st, bits := range strengthToInt {
 		fmt.Println()
 		fmt.Println("Minimum", bits, "bits of Entropy:")
-		printOne(pwe.FORMAT_NUMBERS, st)
-		printOne(pwe.FORMAT_EASY, st)
-		printOne(pwe.FORMAT_COMPLEX, st)
+		printOne(pwe.FormatNumbers, st)
+		printOne(pwe.FormatEasy, st)
+		printOne(pwe.FormatComplex, st)
 	}
 
 }

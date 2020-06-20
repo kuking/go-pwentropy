@@ -13,34 +13,34 @@ const (
 	symbolsNumbers = "0123456789"
 	symbolsComplex = "ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz0123456789!@$%^&*()[]{}?"
 
-	FORMAT_EASY    PwFormat = iota
-	FORMAT_NUMBERS PwFormat = iota
-	FORMAT_COMPLEX PwFormat = iota
+	FormatEasy    PwFormat = iota
+	FormatNumbers PwFormat = iota
+	FormatComplex PwFormat = iota
 
-	STRENGTH_96  PwStrength = iota
-	STRENGTH_128 PwStrength = iota
-	STRENGTH_192 PwStrength = iota
-	STRENGTH_256 PwStrength = iota
+	Strength96  PwStrength = iota
+	Strength128 PwStrength = iota
+	Strength192 PwStrength = iota
+	Strength256 PwStrength = iota
 )
 
 var pwLengthByStrengthAndFormat = map[PwStrength]map[PwFormat]int{
-	STRENGTH_96:  {FORMAT_COMPLEX: 19, FORMAT_EASY: 19, FORMAT_NUMBERS: 22},
-	STRENGTH_128: {FORMAT_COMPLEX: 24, FORMAT_EASY: 24, FORMAT_NUMBERS: 29},
-	STRENGTH_192: {FORMAT_COMPLEX: 32, FORMAT_EASY: 33, FORMAT_NUMBERS: 42},
-	STRENGTH_256: {FORMAT_COMPLEX: 41, FORMAT_EASY: 42, FORMAT_NUMBERS: 54},
+	Strength96:  {FormatComplex: 19, FormatEasy: 19, FormatNumbers: 22},
+	Strength128: {FormatComplex: 24, FormatEasy: 24, FormatNumbers: 29},
+	Strength192: {FormatComplex: 32, FormatEasy: 33, FormatNumbers: 42},
+	Strength256: {FormatComplex: 41, FormatEasy: 42, FormatNumbers: 54},
 }
 
 func PwGen(pwGenFormat PwFormat, strength PwStrength) string {
 	dash := 0
 	var pool string
 	switch pwGenFormat {
-	case FORMAT_EASY:
+	case FormatEasy:
 		dash = 5
 		pool = symbolsEasy
-	case FORMAT_NUMBERS:
+	case FormatNumbers:
 		dash = 4
 		pool = symbolsNumbers
-	case FORMAT_COMPLEX:
+	case FormatComplex:
 		dash = 5
 		pool = symbolsComplex
 	default:
