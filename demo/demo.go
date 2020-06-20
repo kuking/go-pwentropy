@@ -17,7 +17,7 @@ func printOne(format pwe.PwFormat, strength pwe.PwStrength) {
 func main() {
 	fmt.Println("go-pwentropy demo")
 
-	for _, st := range []pwe.PwStrength{pwe.STRENGTH_96, pwe.STRENGTH_128, pwe.STRENGTH_192, pwe.STRENGTH_256} {
+	for st := range strengthToInt {
 		fmt.Println()
 		fmt.Println("Minimum", strengthToInt[st], "bits of Entropy:")
 		printOne(pwe.FORMAT_NUMBERS, st)
