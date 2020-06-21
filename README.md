@@ -107,3 +107,21 @@ pw := pwe.PwGen(pwe.FormatEasy, pwe.Strength96)
 fmt.Println("password:",pw,"has entropy of", pwe.FairEntropy(pw))
 ```
 
+**Command line:**
+
+```shell script
+$ cd pwgen
+$ go build
+$ ./pwgen -h                                                                                                                                                                                       *[master]
+Usage of ./pwgen:
+  -f string
+    	Password format, options: easy, complex, numeric. (default "easy")
+  -h	Show usage
+  -s int
+    	Password strength, measured in entropy strength, valid options: 96, 128, 192, 256. (default 96)
+$ ./pwgen                                                                                                                                                                                          *[master]
+ySTuu-5Sxan-SEn9a-beW3
+$ ./pwgen -s 128                                                                                                                                                                                   *[master]
+6wHtC-C25yV-6L8xL-z7u9D-9cer
+```
+
