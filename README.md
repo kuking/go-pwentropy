@@ -107,7 +107,7 @@ pw := pwe.PwGen(pwe.FormatEasy, pwe.Strength96)
 fmt.Println("password:",pw,"has entropy of", pwe.FairEntropy(pw))
 ```
 
-**Command line:**
+#### pwgen
 
 ```shell script
 $ cd pwgen
@@ -125,3 +125,22 @@ $ ./pwgen -s 128                                                                
 6wHtC-C25yV-6L8xL-z7u9D-9cer
 ```
 
+#### pwchk
+
+```shell script
+$ cd pwchk
+$ go build && ./pwchk 
+pwchk: enter a password to estimate its entropy
+Password: 
+
+Entropy by Unique Symbols (lower-ish bound): 27.00
+Entropy by Unique Symbols (excluding common passwords): 3.00
+Entropy by Classes involved (upper-ish bound): 54.40
+
+=> Fair Entropy: 27.85
+
+On Password Entropy: Anything with less than 55 bits IS NOT good. Between 55 and 64 is poor.
+Aim to use passwords with 64 bits of entropy, or more. (128 or at least 96 would be good.)
+```
+
+The password input was `password`.
